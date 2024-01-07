@@ -1,0 +1,8 @@
+# Project exclude paths
+/dubbo-service-api/target/
+/sentinel-updown-service-api/target/
+/user-service-api/target/
+/.idea/
+/arthas-output/
+*.iml
+/target/
