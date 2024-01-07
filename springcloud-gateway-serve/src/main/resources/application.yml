@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: springcloud-gateway-serve
+  cloud:
+    nacos:
+      discovery:
+        namespace: public
+        password: nacos
+        server-addr: 192.168.247.5:8848
+        username: nacos
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/getAddress, /filter
+            #- Time=上午8:00,下午8:30 #自定义谓词工程
+            #- Query=serialno,123
+            #- Header=authtoken,666
+            #- Cookie=token,666
+            #- After=2022-12-27T21:08:23.599+08:00[Asia/Shanghai]
+            #- Before=2022-12-28T21:08:05.599+08:00[Asia/Shanghai]
+            #- Between=2022-12-27T21:08:23.599+08:00[Asia/Shanghai],2022-12-27T21:11:23.599+08:00[Asia/Shanghai]
+          filters:
+            #- AddRequestHeader=X-Request-red, blue
+            #- AddRequestParameter=color, red
+            #- AddResponseHeader=X-Response-Red, Blue
+            #- Log=true #自定义过滤器
+    sentinel:
+      eager: true
+      transport:
+        dashboard: 192.168.247.5:9100
+
+server:
+  port: 9999
